@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+  <span>Category</span>
+  <span class="example-spacer"></span>
+
+  <button mat-raised-button (click)="OnBack()">
+    Back to Products
+  </button>
+
+  <button mat-raised-button (click)="OnAddCategory()" style="margin-left:1rem">
+    Add Category
+  </button>
+</mat-toolbar>
+
+<ng-container *ngIf="contentLoaded && categoryList.length > 0">
+  <table [dataSource]="dataSource" mat-table class="mat-elevation-z8">
+
+    <ng-container matColumnDef="categoryId">
+      <th mat-header-cell *matHeaderCellDef>Category Id </th>
+      <td mat-cell *matCellDef="let element">{{element.categoryId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="categoryName">
+      <th mat-header-cell *matHeaderCellDef>Category Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoryName}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element; let index = index">
+        <mat-icon matToolTip="edit product" (click)="onEditCategory(element)" color="primary" style="cursor:pointer;">
+          edit
+        </mat-icon>
+        <mat-icon matToolTip="delete product" (click)="onDeleteCategory(element)" color="primary"
+          style="cursor:pointer; margin-left:1rem">
+          clear
+        </mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</ng-container>
+
+<ng-container *ngIf="contentLoaded && categoryList.length === 0">
+  <mat-card>
+    <mat-card-content style="text-align: center">
+      Sorry, no data available!
+    </mat-card-content>
+  </mat-card>
+</ng-container>

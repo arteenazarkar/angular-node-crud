@@ -1,0 +1,65 @@
+<mat-toolbar color="primary">
+  <span>Product</span>
+  <span class="example-spacer"></span>
+
+  <button mat-raised-button (click)="ViewCategory()">
+    View Categories
+  </button>
+
+  <button mat-raised-button (click)="OnCategory()" style="margin-left:1rem">
+    Add Category
+  </button>
+
+  <button mat-raised-button (click)="OnAdd()" style="margin-left:1rem">
+    Add Product
+  </button>
+</mat-toolbar>
+
+<ng-container *ngIf="contentLoaded && productList.length > 0">
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="productId">
+      <th mat-header-cell *matHeaderCellDef>Product Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.productId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="productName">
+      <th mat-header-cell *matHeaderCellDef>Product Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.productName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="categoryName">
+      <th mat-header-cell *matHeaderCellDef>Category Name </th>
+      <td mat-cell *matCellDef="let element">{{element.category.categoryName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="categoryId">
+      <th mat-header-cell *matHeaderCellDef>Category Id </th>
+      <td mat-cell *matCellDef="let element"> {{element.categoryId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef> Action </th>
+      <td mat-cell *matCellDef="let element; let index = index">
+        <mat-icon matToolTip="edit product" (click)="onEditProduct(element)" color="primary" style="cursor:pointer;">
+          edit
+        </mat-icon>
+        <mat-icon matToolTip="delete product" (click)="onDeleteProduct(element)" color="primary"
+          style="cursor:pointer; margin-left:1rem">
+          clear
+        </mat-icon>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+  </table>
+</ng-container>
+<ng-container *ngIf="contentLoaded && productList.length === 0">
+  <mat-card>
+    <mat-card-content style="text-align: center">
+      Sorry, no data available!
+    </mat-card-content>
+  </mat-card>
+</ng-container>

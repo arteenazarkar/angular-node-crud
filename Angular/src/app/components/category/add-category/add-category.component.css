@@ -1,0 +1,27 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+section#add-category .main-div {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section#add-category .column {
+  flex: 50%;
+}
+
+section#add-category .mat-card-title {
+  margin-bottom: 30px;
+}
+
+section#add-category .button-container {
+  margin-top: 15px;
+}
+
+section#add-category .button-container .mat-stroked-button:not(:first-of-type) {
+  margin-left: 15px;
+}
